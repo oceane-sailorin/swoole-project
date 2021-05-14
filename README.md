@@ -10,6 +10,8 @@ install php8.0-mysql
 
 install swoole from sources and compile
 
+don't use 'pecl install swoole' with php8 for now if you want to stay sane
+
 git clone https://github.com/swoole/swoole-src.git && \
 cd swoole-src && \
 git checkout v4.6.x
