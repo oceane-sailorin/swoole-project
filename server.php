@@ -11,9 +11,23 @@ $server->on("start", function (Server $server) {
     echo "Swoole http server is started at http://127.0.0.1:9501\n";
 });
 
-$server->on("request", function (Request $request, Response $response) {
+$message = "";
+
+$server->on("request", function (Request $request, Response $response) use (&$message) {
     $response->header("Content-Type", "text/plain");
-    $response->end("Hello World\n");
+    $message .= "Server started \n";
+  
+    $i = 0;
+    while (true) {
+        co::sleep(1);
+        $message .= "Sleep \n";
+        if (++$i === 5) {
+            $message .= "Stop \n";
+            break;
+        }
+    }
+    echo "No more messages should be printed out after the 5th second.\n";
+    $response->end($message);
 });
 
 $server->start();
