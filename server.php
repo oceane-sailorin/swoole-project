@@ -12,22 +12,21 @@ $server->on("start", function (Server $server) {
 });
 
 $message = "";
-
 $server->on("request", function (Request $request, Response $response) use (&$message) {
     $response->header("Content-Type", "text/plain");
-    $message .= "Server started \n";
+    $response->write("Server started \n");
   
     $i = 0;
     while (true) {
         co::sleep(1);
-        $message .= "Sleep \n";
+        $response->write("Sleep \n");
         if (++$i === 5) {
-            $message .= "Stop \n";
+            $response->write("Stop \n");
             break;
         }
     }
-    echo "No more messages should be printed out after the 5th second.\n";
-    $response->end($message);
+    $response->end("No more messages should be printed out after the 5th second.\n");
+    
 });
 
 $server->start();

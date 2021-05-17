@@ -42,3 +42,4 @@ Then test php server.php
 If ok, remove folder swoole-src
 
 In server.php, create http server with new Swoole\HTTP\Server
+Then write a timer coroutine for example
